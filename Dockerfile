@@ -2,6 +2,7 @@ FROM java:7
 
 RUN apt-get update ; \
   apt-get -y install xvfb \
+    openvpn \
     vnc4server \
     tightvncserver \
     libswt-gnome-gtk-3-jni \
@@ -11,6 +12,8 @@ RUN apt-get update ; \
 RUN useradd -u 1999 -U -m -d /vnc vnc
 
 COPY entrypoint.sh /vnc/entrypoint.sh
+
+COPY torguard/* /etc/openvnc/
 
 USER vnc
 
